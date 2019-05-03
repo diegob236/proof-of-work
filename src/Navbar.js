@@ -5,8 +5,8 @@ class NavBar extends Component {
   render() {
     return (
       <Navbar style={{ height: '50px', background: '#222222'}}>
-      <Button className="btn pull-right">sign up</Button>
-        <Button className="btn pull-right">log in</Button>
+        <Button className="btn pull-right" variant="dark">sign up</Button>
+        <Button className="btn pull-right" variant="dark">log in</Button>
       </Navbar>
     );
   }
