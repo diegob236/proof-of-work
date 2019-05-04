@@ -5,6 +5,8 @@ import NavBar from './Navbar';
 import Scanner from './Scanner';
 import './App.css';
 
+const uuidv3 = require('uuid/v3');
+
 function App() {
   return (
     <div className="App">
