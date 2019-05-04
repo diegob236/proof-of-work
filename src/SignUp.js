@@ -17,8 +17,7 @@ class Signup extends Component {
       name: "",
       email: "",
       DOB: "",
-      phone: "",
-      company: {}
+      phone: ""
     };
   }
 
