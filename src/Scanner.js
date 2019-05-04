@@ -6,7 +6,6 @@ import Resume from './Resume'
  
 
 const axios = require('axios');
-var Modal = require('react-bootstrap');
 
 class Scanner extends Component {
   constructor(props){
