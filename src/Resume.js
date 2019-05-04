@@ -23,7 +23,7 @@ class Resume extends Component{
     return (
       <div>
         <NavBar></NavBar>
-        {this.state.uId}
+        <ul>{jobs}</ul>
       </div>
     );
   }

@@ -12,9 +12,6 @@ class Signup extends Component {
     super(props);
 
     this.state = {
-      $class: "org.pow.app.User",
-      uID: "",
-      type: "UNEMPLOYED",
       name: "",
       email: "",
       DOB: "",
@@ -35,24 +32,23 @@ class Signup extends Component {
     });
   }
 
-  handleDate = event => {
-    this.setState({
-      DOB: event.target.value
-    });
-  }
 
   handleSubmit = event => {
     var hash = uuidv3(this.state.email, uuidv3.URL)
     var date = this.state.DOB +'T00:00:00.000Z'
-    this.setState({
+    var user = {
       uID: hash,
-      DOB: date
-    });
-
+      type: "UNEMPLOYED",
+      name: this.state.name,
+      email: this.state.email,
+      DOB: date,
+      phone: this.state.phone
+    }
+    alert(JSON.stringify(user))
     axios({
       method: 'post',
-      url: 'http://157.230.172.148:3000/',
-      data: this.state
+      url: 'http://157.230.172.148:3000/api/User',
+      data: user
     })
       .then(function (response){
         console.log(response);
@@ -104,7 +100,7 @@ class Signup extends Component {
                   type="DOB"
                   value={this.state.DOB}
                   placeholder='YYYY-MM-DD'
-                  onChange={this.handleDate}
+                  onChange={this.handleChange}
                 />
             </FormGroup>
             <Button
