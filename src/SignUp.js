@@ -4,7 +4,7 @@ import NavBar from './Navbar';
 
 import "./SignUp.css";
 
-const axios = require('axios')
+const axios = require('axios');
 const uuidv3 = require('uuid/v3');
 
 class Signup extends Component {
@@ -18,8 +18,7 @@ class Signup extends Component {
       name: "",
       email: "",
       DOB: "",
-      phone: "",
-      company: {}
+      phone: ""
     };
   }
 
@@ -67,6 +66,7 @@ class Signup extends Component {
     return(
       <div>
         <NavBar></NavBar>
+
         <div className='SignUp'>
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId='name'>
