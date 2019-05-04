@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import NavBar from './Navbar';
 import Welcome from './Welcome';
 import Scanner from './Scanner';
 import Login from './Login';
@@ -14,7 +13,6 @@ const uuidv3 = require('uuid/v3');
 function App() {
   return (
     <div className="App">
-      <NavBar></NavBar>
       <Route path="/" exact component={Welcome} />
       <Route path="/scan" component={Scanner} />
       <Route path="/login" component={Login} />
