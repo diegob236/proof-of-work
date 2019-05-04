@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-reader'
+import './Scanner.css'
  
 class Scanner extends Component {
   state = {
@@ -18,7 +19,7 @@ class Scanner extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="Scanner">
         <QrReader
           delay={300}
           onError={this.handleError}
