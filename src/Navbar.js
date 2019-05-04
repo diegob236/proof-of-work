@@ -1,13 +1,17 @@
 import React, { Component } from "react";
-import { Navbar, Button } from "react-bootstrap";
+import { Navbar, Button, ButtonToolbar } from "react-bootstrap";
+import './Navbar.css'
 
 class NavBar extends Component {
   render() {
     return (
-      <Navbar style={{ height: '50px', background: '#222222' }}>
-        <Button className="btn pull-right" variant="dark" href="/signup">sign up</Button>
-        <Button className="btn pull-right" variant="dark" href="/login">log in</Button>
-        <Button className="btn pull-right" variant="dark" href="/scan">scan</Button>
+      <Navbar style={{ background: '#222222' }}>
+        <ButtonToolbar className = 'toolbar'>
+          <Button className="btn pull-left" variant="dark" href="/">Home</Button>
+          <Button className="btn pull-right" variant="dark" href="/scan">Scan</Button>
+          <Button className="btn pull-right" variant="dark" href="/login">Log in</Button>
+          <Button className="btn pull-right" variant="dark" href="/signup">Sign Up</Button>
+        </ButtonToolbar>
       </Navbar>
     );
   }

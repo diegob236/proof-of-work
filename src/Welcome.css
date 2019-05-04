@@ -1,0 +1,14 @@
+.Welcome {
+  padding: 60px 0;
+  vertical-align: middle;
+}
+
+.banner {
+  padding: 50px;
+  vertical-align: middle;
+}
+
+.buttonGroup {
+  vertical-align: middle;
+  align-items: center
+}
