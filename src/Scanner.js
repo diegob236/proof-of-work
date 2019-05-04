@@ -13,10 +13,8 @@ class Scanner extends Component {
     super(props)
     this.state = {
       result: [],
-      hasScanned: false,
-      cantFind: false
+      hasScanned: false
     }
-    this.handleModelClose = this.handleModelClose.bind(this);
     this.handleScan = this.handleScan.bind(this);
   }
  
@@ -33,10 +31,7 @@ class Scanner extends Component {
           });
         })
         .catch(function (error){
-          this.setState({
-            cantFind: true
-          });
-          console.log(error);
+          alert('Cant find that user:'+error)
         });
       
       
@@ -44,11 +39,6 @@ class Scanner extends Component {
 
   }
 
-  handleModelClose(){
-    this.setState({
-      cantFind: false
-    });
-  }
 
 
   render() {
@@ -68,9 +58,6 @@ class Scanner extends Component {
     return (
       <div className="Scanner">
         <NavBar></NavBar>
-        <Modal show={this.state.cantFind} onHide={this.handleModelClose}>
-          <p>Cant find that user</p>
-        </Modal>
         {viewable}
       </div>
     )
