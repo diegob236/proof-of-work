@@ -35,6 +35,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <p>{uuidv3('jimmy@.com', uuidv3.URL)}</p>
         <Route path="/" exact component={Welcome} />
         <Route path="/scan" component={Scanner} />
         <Route path="/login" component={Login} />
