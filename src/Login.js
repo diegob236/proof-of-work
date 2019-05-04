@@ -34,11 +34,16 @@ export default class Login extends Component {
     })
     .then((response) => {
       console.log(response);
-      this.setState({invalid: false})
+      if (response.status === 200) {
+        this.setState({invalid: false});
+        this.props.logIn(this.state.email);
+      }
+      else {
+        this.setState({invalid: true})
+      }
     })
     .catch((error) => {
       console.log(error);
-      this.setState({invalid: true})
     })
   }
 
@@ -65,7 +70,7 @@ export default class Login extends Component {
             </FormGroup>
             <Button
               block
-              bsSize="largse"
+              bsSize="large"
               disabled={!this.validateForm()}
               type="submit"
             >

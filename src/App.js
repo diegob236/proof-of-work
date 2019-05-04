@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 
 import Welcome from './Welcome';
 import Scanner from './Scanner';
@@ -32,17 +32,23 @@ class App extends Component {
     }
   }
 
+  logIn(email) {
+    this.setState({email: email, loggedIn: true})
+    console.log(this.state)
+    this.props.history.push("/dashboard")
+  }
+
   render() {
     return (
       <div className="App">
         <Route path="/" exact component={Welcome} />
         <Route path="/scan" component={Scanner} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/login" render={props => <Login logIn = {this.logIn.bind(this)} />} />
+        <Route path="/signup" render={props => <Signup logIn = {this.logIn.bind(this)} />} />
         <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
