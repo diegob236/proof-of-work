@@ -3,11 +3,16 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import './Login.css';
 import NavBar from "./Navbar";
 
+const axios = require('axios')
+const uuidv3 = require('uuid/v3');
+
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: ""
+      email: "",
+      invalid: false
     };
   }
 
@@ -23,6 +28,24 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    axios({
+      method: 'get',
+      url: 'http://157.230.172.148:3000/api/User/' + uuidv3(this.state.email, uuidv3.URL)
+    })
+    .then((response) => {
+      console.log(response);
+      this.setState({invalid: false})
+    })
+    .catch((error) => {
+      console.log(error);
+      this.setState({invalid: true})
+    })
+  }
+
+  displayError() {
+    if (this.state.invalid) {
+      return <div className ='error'>User not found.</div>
+    }
   }
 
   render() {
@@ -42,13 +65,14 @@ export default class Login extends Component {
             </FormGroup>
             <Button
               block
-              bsSize="large"
+              bsSize="largse"
               disabled={!this.validateForm()}
               type="submit"
             >
               Login
             </Button>
           </form>
+          {this.displayError()}
         </div>
       </div>
     );

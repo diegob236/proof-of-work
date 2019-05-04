@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Button, Panel, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import NavBar from './Navbar';
 
 import "./SignUp.css";
 
-const axios = require('axios')
+const axios = require('axios');
 const uuidv3 = require('uuid/v3');
 
 class Signup extends Component {
@@ -26,7 +26,7 @@ class Signup extends Component {
   validateForm() {
     return this.state.email.length > 0 &&
       this.state.name.length > 0 &&
-      this.state.DOB.length == 10 &&
+      this.state.DOB.length === 10 &&
       this.state.phone.length > 9;
   }
 
