@@ -4,6 +4,7 @@ import { Route, withRouter } from "react-router-dom";
 import Dashboard from './Dashboard';
 import DashboardNavbar from './DashboardNavbar';
 import Login from './Login';
+import ManageEmployees from './ManageEmployees';
 import NavBar from './Navbar';
 import Resume from './Resume'
 import PrivateRoute from './PrivateRoute';
@@ -66,7 +67,9 @@ class App extends Component {
         <Route path="/login" render={props => <Login logIn={this.logIn.bind(this)} />} />
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
         <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
-        <PrivateRoute authed={this.state.loggedIn} path='/dashboard/resume' component={Resume} />
+        <PrivateRoute authed={this.state.loggedIn} path='/resume' component={Resume} />
+        <PrivateRoute authed={this.state.loggedIn && (this.state.permissions === 'ADMINISTRATOR'
+        || this.state.permissions === 'MANAGER')} path='/manageemployees' component={ManageEmployees} />
       </div>
     );
   }

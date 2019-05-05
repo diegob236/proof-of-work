@@ -40,7 +40,7 @@ class Dashboard extends Component {
         store.getState().permissions === 'ADMINISTRATOR') {
       return <React.Fragment>
               <Button className="menubutton" variant="dark">Hire Employee</Button> 
-              <Button className="menubutton" variant="dark">Terminate Employee</Button>
+              <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/manageemployees')}>Manage Employees</Button>
             </React.Fragment>
     }
   }
