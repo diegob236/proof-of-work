@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 import './Welcome.css';
 
-const uuidv3 = require('uuid/v3');
 
 class Welcome extends Component {
   render() {

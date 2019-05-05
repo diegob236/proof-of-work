@@ -6,10 +6,13 @@ import Scanner from './Scanner';
 import Login from './Login';
 import Signup from './SignUp';
 import Dashboard from './Dashboard';
+import DashboardNavbar from './DashboardNavbar';
+import NavBar from './Navbar';
+import store from './redux/store'
+import loginAction from './redux/loginAction';
 
 import './App.css';
 
-const uuidv3 = require('uuid/v3');
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -30,32 +33,40 @@ class App extends Component {
       email: '',
       loggedIn: false
     }
+    store.subscribe(() => {
+      this.setState(store.getState());
+    });
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   logIn(email) {
     this.setState({email: email, loggedIn: true}, () => {console.log(this.state)});
+    store.dispatch(loginAction(this.state));
     this.props.history.push("/dashboard");
   }
 
   logOut() {
     this.setState({email: '', loggedIn: false}, () => {console.log(this.state)});
+    store.dispatch(loginAction({email: '', loggedIn: false}));
     this.props.history.push("/");
   }
 
-  loggedIn() {
-    console.log(this.state.loggedIn);
-    return this.state.loggedIn;
+  renderDashboard() {
+    if (this.props.location.pathname !== '/') {
+      return this.state.loggedIn ? <DashboardNavbar history={this.props.history} logOut={this.logOut}></DashboardNavbar> : <NavBar></NavBar>
+    }
   }
 
   render() {
     return (
       <div className="App">
-        {console.log(this.state)}
+        {this.renderDashboard()}
         <Route path="/" exact component={Welcome} />
-        <Route path="/scan" render={props => <Scanner loggedIn={this.loggedIn.bind(this)} logOut={this.logOut.bind(this)} />} />
+        <Route path="/scan" render={props => <Scanner />} />
         <Route path="/login" render={props => <Login logIn={this.logIn.bind(this)} />} />
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
-        <PrivateRoute authed={this.state.loggedIn} logOut={this.logOut.bind(this)} email={this.state.email} path='/dashboard' component={Dashboard} />
+        <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import NavBar from './Navbar';
 
 import "./SignUp.css";
 
@@ -60,59 +59,55 @@ class Signup extends Component {
 
   render() {
     return(
-      <div>
-        <NavBar></NavBar>
-
-        <div className='SignUp'>
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId='name'>
-              <ControlLabel>Name</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="name"
-                  value={this.state.name}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId='email'>
-              <ControlLabel>Email Adress</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            
-            <FormGroup controlId='phone'>
-              <ControlLabel>Phone Number</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="phone"
-                  value={this.state.phone}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId='DOB'>
-              <ControlLabel>Date of Birth</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="DOB"
-                  value={this.state.DOB}
-                  placeholder='YYYY-MM-DD'
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <Button
-                block
-                bsSize="large"
-                disabled={!this.validateForm()}
-                type="submit"
-              >
-                Sign Up
-            </Button>
-          </form>
-        </div>
+      <div className='SignUp'>
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId='name'>
+            <ControlLabel>Name</ControlLabel>
+            <FormControl
+                autoFocus
+                type="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <FormGroup controlId='email'>
+            <ControlLabel>Email Adress</ControlLabel>
+            <FormControl
+                autoFocus
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          
+          <FormGroup controlId='phone'>
+            <ControlLabel>Phone Number</ControlLabel>
+            <FormControl
+                autoFocus
+                type="phone"
+                value={this.state.phone}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <FormGroup controlId='DOB'>
+            <ControlLabel>Date of Birth</ControlLabel>
+            <FormControl
+                autoFocus
+                type="DOB"
+                value={this.state.DOB}
+                placeholder='YYYY-MM-DD'
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <Button
+              block
+              bsSize="large"
+              disabled={!this.validateForm()}
+              type="submit"
+            >
+              Sign Up
+          </Button>
+        </form>
       </div>
     );
   }
