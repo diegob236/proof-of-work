@@ -22,10 +22,11 @@ class Dashboard extends Component {
   getResume() {
     axios({
       method: 'get',
-      url: 'http://157.230.172.148:3000/api/queries/workExperience/' + uuidv3(store.getState().email, uuidv3.URL)
+      url: 'http://157.230.172.148:3000/api/queries/workExperience/?uIDParam=resource:org.pow.app.User#' + uuidv3(store.getState().email, uuidv3.URL)
     })
     .then((response) => {
       console.log(response);
+
     })
     .catch((error) => {
       console.log(error);
