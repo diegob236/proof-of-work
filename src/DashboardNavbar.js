@@ -13,7 +13,6 @@ class DashboardNavbar extends Component {
       <Navbar style={{ background: '#222222' }}>
         <ButtonToolbar className = 'toolbar'>
           <Button className="btn pull-left" variant="dark" href="/dashboard">Dashboard</Button>
-          <Button className="btn pull-right" variant="dark" href="/scan">Scan</Button>
           <Button className="btn pull-right" variant="dark" onClick={() => this.props.logOut()}>Log out</Button>
         </ButtonToolbar>
       </Navbar>
