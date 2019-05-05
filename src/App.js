@@ -8,6 +8,7 @@ import Signup from './SignUp';
 import Dashboard from './Dashboard';
 import DashboardNavbar from './DashboardNavbar';
 import NavBar from './Navbar';
+import Resume from './Resume'
 import store from './redux/store'
 import loginAction from './redux/loginAction';
 
@@ -67,6 +68,7 @@ class App extends Component {
         <Route path="/login" render={props => <Login logIn={this.logIn.bind(this)} />} />
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
         <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
+        <PrivateRoute authed={this.state.loggedIn} path='/dashboard/resume' component={Resume} />
       </div>
     );
   }
