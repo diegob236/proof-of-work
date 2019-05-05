@@ -54,13 +54,14 @@ class Signup extends Component {
       url: 'http://157.230.172.148:3000/api/User',
       data: user
     })
-      .then(function (response){
-        console.log(response);
-      })
-      .catch(function (error){
-        console.log(error);
-      })
-    }
+    .then(function (response){
+      console.log(response);
+      this.props.logIn(response.data.email, response.data.type);
+    })
+    .catch(function (error){
+      console.log(error);
+    })
+  }
 
   // render(): render component
   render() {

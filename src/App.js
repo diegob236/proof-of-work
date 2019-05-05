@@ -24,7 +24,8 @@ class App extends Component {
     super(props);
     this.state = {
       email: '',
-      loggedIn: false
+      loggedIn: false,
+      permissions: 'UNEMPLOYED'
     }
     store.subscribe(() => {
       this.setState(store.getState());
@@ -34,16 +35,16 @@ class App extends Component {
   }
 
   // logIn(): authenticate user and take them to the dashboard
-  logIn(email) {
-    this.setState({email: email, loggedIn: true}, () => {console.log(this.state)});
+  logIn(email, permissions) {
+    this.setState({email: email, loggedIn: true, permissions: permissions}, () => {console.log(this.state)});
     store.dispatch(loginAction(this.state));
     this.props.history.push("/dashboard");
   }
 
   // logOut(): log out user and take them to the welcome screen
   logOut() {
-    this.setState({email: '', loggedIn: false}, () => {console.log(this.state)});
-    store.dispatch(loginAction({email: '', loggedIn: false}));
+    this.setState({email: '', loggedIn: false, permissions: 'UNEMPLOYED'}, () => {console.log(this.state)});
+    store.dispatch(loginAction({email: '', loggedIn: false, permissions: 'UNEMPLOYED'}));
     this.props.history.push("/");
   }
 

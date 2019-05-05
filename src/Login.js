@@ -40,7 +40,7 @@ class Login extends Component {
       console.log(response);
       if (response.status === 200) {
         this.setState({invalid: false});
-        this.props.logIn(this.state.email);
+        this.props.logIn(this.state.email, response.data.type);
       }
       else {
         this.setState({invalid: true})
