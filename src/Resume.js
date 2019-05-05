@@ -23,7 +23,6 @@ class Resume extends Component{
     )
     return (
       <div>
-        <NavBar></NavBar>
         <ul>{jobs}</ul>
       </div>
     );
