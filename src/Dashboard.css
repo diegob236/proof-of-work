@@ -2,3 +2,9 @@
   padding: 60px 0;
   vertical-align: middle;
 }
+
+.menubutton {
+  padding: 30px;
+  width: 180px;
+  margin: 20px;
+}
