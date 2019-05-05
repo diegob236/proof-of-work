@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import './Resume.css'
-import NavBar from './Navbar';
 import Job from './Job.js'
+import NavBar from './Navbar';
+
+import './Resume.css'
 
 
-//resuires uID data
+// Resume: gets work experience data
 class Resume extends Component{
+
+  // Constructor
   constructor(props, jobList){
     super(props);
     this.state = {
@@ -13,8 +16,7 @@ class Resume extends Component{
     }
   }
 
-
-
+  // render(): render component
   render() {
     const jobs = this.jobs.map((job) =>
       <Job jobData={job}></Job>
@@ -26,7 +28,5 @@ class Resume extends Component{
     );
   }
 }
-
-
 
 export default Resume;

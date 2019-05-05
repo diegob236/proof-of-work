@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-reader'
-import './Scanner.css'
+
 import Resume from './Resume'
- 
+
+import './Scanner.css' 
 
 const axios = require('axios');
 
+
+// Scanner: scan QR code
 class Scanner extends Component {
+
+  // Constructor
   constructor(props){
     super(props)
     this.state = {
@@ -16,6 +21,7 @@ class Scanner extends Component {
     this.handleScan = this.handleScan.bind(this);
   }
  
+  // handleScan(): get scan data
   handleScan = data => {
     if (data) {
         axios({
@@ -34,6 +40,7 @@ class Scanner extends Component {
     }
   }
 
+  // render(): render component
   render() {
     const hasScanned = this.state.hasScanned;
     let viewable;
