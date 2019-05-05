@@ -19,25 +19,32 @@ class Scanner extends Component {
       hasScanned: false
     }
     this.handleScan = this.handleScan.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
  
   // handleScan(): get scan data
   handleScan = data => {
     if (data) {
-        axios({
-          method: 'get',
-          url: 'http://157.230.172.148:3000/api/queries/workExperience?uIDParam='+this.state.uId
-        })
-        .then(function (response){
-          this.setState({
-            result: response,
-            hasScanned: true
-          });
-        })
-        .catch(function (error){
-          alert('Cant find that user:'+error)
-        });   
+      axios({
+        method: 'get',
+        url: 'http://157.230.172.148:3000/api/queries/workExperience?uIDParam=resource:org.pow.app.User#'+this.state.uId
+      })
+      .then(function (response){
+        console.log(response);
+        this.setState({
+          result: response,
+          hasScanned: true
+        });
+      })
+      .catch(function (error){
+        alert('Can\'t find that user:'+error)
+      });   
     }
+  }
+
+  // handleError(): log errors
+  handleError = err => {
+    console.log(err)
   }
 
   // render(): render component
