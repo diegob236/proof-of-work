@@ -64,7 +64,7 @@ class Login extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="email">
+          <Form.Group controlId="email" bssize="large">
             <Form.Label>Email</Form.Label>
             <Form.Control
               autoFocus
@@ -75,6 +75,7 @@ class Login extends Component {
           </Form.Group>
           <Button
             block
+            bssize="large"
             disabled={!this.validateForm()}
             type="submit"
           >

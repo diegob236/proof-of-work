@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
+import store from "./redux/store";
 
 import './Hire.css'
-import store from "./redux/store";
 
 const axios = require('axios');
 const uuidv1 = require('uuid/v1');
@@ -92,11 +92,11 @@ class Hire extends Component {
           </Form.Group>
           <Form.Group controlId="type">
             <Form.Label>Job Type</Form.Label>
-            <Form.Control 
+            <Form.Control
               autoFocus
+              as="select" 
               type="type"
               ref={select => {this.select = select}}
-              componentClass="select"
               value={this.state.type}
               onChange={this.handleChange}>
                 <option value="UNEMPLOYED">Select</option>
@@ -125,7 +125,7 @@ class Hire extends Component {
           </Form.Group>
           <Button
               block
-              bsSize="large"
+              bssize="large"
               disabled={!this.validateForm()}
               type="submit"
             >
