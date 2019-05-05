@@ -78,7 +78,7 @@ class Signup extends Component {
               />
           </FormGroup>
           <FormGroup controlId='email'>
-            <ControlLabel>Email Adress</ControlLabel>
+            <ControlLabel>Email Address</ControlLabel>
             <FormControl
                 autoFocus
                 type="email"

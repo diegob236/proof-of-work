@@ -7,6 +7,7 @@ import Hire from './Hire';
 import Login from './Login';
 import ManageEmployees from './ManageEmployees';
 import NavBar from './Navbar';
+import NewCompany from './NewCompany';
 import Resume from './Resume'
 import PrivateRoute from './PrivateRoute';
 import Scanner from './Scanner';
@@ -75,8 +76,9 @@ class App extends Component {
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
         <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
         <PrivateRoute authed={this.state.loggedIn} path='/resume' component={Resume} />
-        <PrivateRoute authed={this.elevatedPermissions()} path='/manageemployees' component={ManageEmployees} />
+        <PrivateRoute authed={this.state.loggedIn} path='/createcompany' component={NewCompany} />
         <PrivateRoute authed={this.elevatedPermissions()} path='/hire' component={Hire} />
+        <PrivateRoute authed={this.elevatedPermissions()} path='/manageemployees' component={ManageEmployees} />
       </div>
     );
   }
