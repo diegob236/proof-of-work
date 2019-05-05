@@ -27,7 +27,7 @@ class NewCompany extends Component {
   // validateForm(): check for valid input
   validateForm() {
     return this.state.email.length > 0 &&
-      this.state.email !== this.props.email &&
+      this.state.email !== store.getState().email &&
       this.state.name.length > 0 &&
       this.state.location.length > 1 &&
       this.state.description.length > 0 &&

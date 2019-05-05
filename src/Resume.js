@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {ListGroup} from'react-bootstrap'
+import {Button} from'react-bootstrap'
 import Card from 'react-bootstrap/Card'
+import CardGroup from 'react-bootstrap/CardGroup'
 
 import store from './redux/store';
 
@@ -23,7 +24,7 @@ class Resume extends Component{
     this.getResume = this.getResume.bind(this);
     this.renderJobs = this.renderJobs.bind(this);
     this.populateJobData = this.populateJobData.bind(this);
-    this.getCompanyData = this.getCompanyData.bind(this);
+    this.handleQuit = this.handleQuit.bind(this)
   }
 
   // componentDidMount(): send GET request to get data
@@ -52,68 +53,83 @@ class Resume extends Component{
     })
   }
 
-  async getCompanyData(companyID){
-    var join = "Error"
+  handleQuit(job){
+
+    let quitData = {
+      $class: "org.pow.app.quit",
+      job: job.jobID,
+      employee: job.employee
+    }
     axios({
       method: 'get',
-      url: 'http://157.230.172.148:3000/api/Company/'+companyID
+      url: 'http://157.230.172.148:3000/api/quit',
+      data: quitData
     })
     .then((response) => {
       console.log(response.data);
-      join = this.state.companyList.concat(response.data) 
+      this.populateJobData(response.data);
+      this.setState({
+        jobList: response.data
+      }); 
     })
     .catch((error) => {
       console.log(error);
-      alert('No jobs found for ' + store.getState().email);
-    });
-    await this.setState({
-      companyList: join
-    });
+      console.log('No jobs found for ' + store.getState().email);
+    })
   }
 
   async populateJobData(data){
     let jobs = []
+    let companies = []
     for (let i = 0; i < data.length; i++){
       console.log(data[i].company.companyID);
-      this.getCompanyData(data[i].company.companyID);
+      companies.push(data[i].company);
       jobs.push(data[i]);
     }
-    await this.setState({jobList: jobs});
+    await this.setState({
+      jobList: jobs,
+      companyList: companies
+    });
   }
 
   renderJobs() {
     console.log(this.state.jobList)
     let jobs = []
-    jobs.push(<h1>Verified Resume</h1>)
+    jobs.push(<div key="header"><br></br><h1>Verified Resume</h1><br></br></div>)
     for (let i = 0; i < this.state.jobList.length; i++){
       let job = this.state.jobList[i]
+      let company = this.state.companyList[i]
       jobs.push(
         <div key={job.startDate} as="li">
           <Card style={{ width: '18rem' }}>
             <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+              <Card.Title>{job.jobTitle}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">{company.name}</Card.Subtitle>
               <Card.Text>
-                here
+                {job.description}
               </Card.Text>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
+              <Card.Text>
+                Start Date: {job.startDate.split('T')[0]}
+              </Card.Text>
+              <Card.Text>
+                End Date: {typeof(job.endDate) === 'undefined' ?  'Current' : job.startDate.split('T')[0]}
+              </Card.Text>
+              {typeof(job.endDate) !== 'undefined' ?  '' : 
+              <Button variant="danger" onClick={this.handleQuit(job)}>Quit</Button>}
             </Card.Body>
           </Card>
-          <h3>{job.jobTitle}</h3>
         </div>
       )
     }
-    return <ListGroup as="ul">{jobs}</ListGroup>
+    return jobs;
   }
 
   // render(): render component
   render() {
     console.log(this.state.jobList)
     return (
-      <div>
-          {this.renderJobs()}
-      </div>
+      <CardGroup>{this.renderJobs}</CardGroup>
+          
     );
   }
 }
