@@ -1,32 +1,29 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import DashboardNavbar from './DashboardNavbar';
+import ReactDOM from 'react-dom';
 
 
 const axios = require('axios');
 const uuidv1 = require('uuid/v1');
 const uuidv3 = require('uuid/v3');
 
-class NewCompany extends Component {
-  constructor(props) {
+class Fire extends Component {
+  constructor(props, job) {
     super(props);
 
     this.state = {
-      name: "",
-      location: "",
-      description: "",
       email: "",
-      phone: ""
+      employee: job.employee.uId
     };
   }
 
   validateForm() {
     return this.state.email.length > 0 &&
-      this.state.email !== this.props.email &&
-      this.state.name.length > 0 &&
+      this.state.jobTitle.length > 0 &&
       this.state.location.length > 1 &&
       this.state.description.length > 0 &&
-      this.state.phone.length > 9;
+      this.state.type !== "UNEMPLOYED"
   }
 
   handleChange = event => {
@@ -41,15 +38,8 @@ class NewCompany extends Component {
     var date = this.state.DOB +'T00:00:00.000Z'
     
     var company = {
-      $class: "org.pow.app.newCompany",
-      companyID: uuidv3(this.state.email, uuidv3.URL),
-      founderJobID: uuidv1(),
-      name: this.state.name,
-      location: this.state.location,
-      description: this.state.description,
-      email: this.state.email,
-      phone: this.state.phone,
-      founder: uuidv3(this.props.email, uuidv3.URL)
+      $class: "org.pow.app.terminate",
+      manager: this.state.email,
     }
 
     alert(JSON.stringify(user))
@@ -69,18 +59,42 @@ class NewCompany extends Component {
   render() {
     return(
       <div>
-        <NavBar></NavBar>
-        <div className='NewCompany'>
-          <h2>Create Company</h2>
+        <DashboardNavbar></DashboardNavbar>
+        <div className='Hire'>
+          <h2>Hire Employee</h2>
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId='name'>
-              <ControlLabel>Name</ControlLabel>
+            <FormGroup controlId='jobTitle'>
+              <ControlLabel>Job Title</ControlLabel>
               <FormControl
                   autoFocus
-                  type="name"
+                  type="jobTitle"
                   value={this.state.name}
                   onChange={this.handleChange}
                 />
+            </FormGroup>
+            <FormGroup controlId='email'>
+              <ControlLabel>New Employee's Email Adress</ControlLabel>
+              <FormControl
+                  autoFocus
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+            </FormGroup>
+            <FormGroup controlId="type">
+              <ControlLabel>Job Type</ControlLabel>
+              <FormControl 
+                autoFocus
+                type="type"
+                ref={select => {this.select = select}}
+                componentClass="select"
+                value={this.state.type}
+                onChange={this.handleChange}>
+                  <option value="UNEMPLOYED">Select</option>
+                  <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+                  <option value="MANAGER">MANAGER</option>
+                  <option value="WORKER">WORKER</option>
+              </FormControl>
             </FormGroup>
             <FormGroup controlId='description'>
               <ControlLabel>Description</ControlLabel>
@@ -100,35 +114,6 @@ class NewCompany extends Component {
                   onChange={this.handleChange}
                 />
             </FormGroup>
-            <FormGroup controlId='email'>
-              <ControlLabel>Email Adress</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            
-            <FormGroup controlId='phone'>
-              <ControlLabel>Phone Number</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="phone"
-                  value={this.state.phone}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId='DOB'>
-              <ControlLabel>Date of Birth</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="DOB"
-                  value={this.state.DOB}
-                  placeholder='YYYY-MM-DD'
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
             <Button
                 block
                 bsSize="large"
@@ -144,4 +129,4 @@ class NewCompany extends Component {
   }
 }
 
-export default NewCompany;
+export default Fire;
