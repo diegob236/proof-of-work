@@ -18,8 +18,8 @@ class Dashboard extends Component {
     if (store.getState().permissions === 'MANAGER' ||
         store.getState().permissions === 'ADMINISTRATOR') {
       return <React.Fragment>
-              <Button className="menubutton" variant="dark">Hire Employee</Button> 
-              <Button className="menubutton" variant="dark">Terminate Employee</Button>
+              <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/hire')}>Hire Employee</Button> 
+              <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/manageemployees')}>Manage Employees</Button>
             </React.Fragment>
     }
   }
@@ -32,7 +32,7 @@ class Dashboard extends Component {
         <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/resume')}>My Resume</Button>
         <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/scan')}>Scan Resume</Button>
         {this.renderManagerButtons()}
-        <Button className="menubutton" variant="dark">Create Company</Button>
+        <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/createcompany')}>Create Company</Button>
         <Button className="menubutton" variant="dark">Quit Job</Button>
       </div>
     );

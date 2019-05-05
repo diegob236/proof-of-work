@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+  .NewCompany {
+    padding: 60px 0;
+  }
+
+  .NewCompany form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}

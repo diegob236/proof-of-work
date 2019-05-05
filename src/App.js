@@ -3,8 +3,11 @@ import { Route, withRouter } from "react-router-dom";
 
 import Dashboard from './Dashboard';
 import DashboardNavbar from './DashboardNavbar';
+import Hire from './Hire';
 import Login from './Login';
+import ManageEmployees from './ManageEmployees';
 import NavBar from './Navbar';
+import NewCompany from './NewCompany';
 import Resume from './Resume'
 import PrivateRoute from './PrivateRoute';
 import Scanner from './Scanner';
@@ -33,6 +36,7 @@ class App extends Component {
     });
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.elevatedPermissions = this.elevatedPermissions.bind(this);
   }
 
   // logIn(): authenticate user and take them to the dashboard
@@ -52,8 +56,13 @@ class App extends Component {
   // renderDashboard(): display different dashboard depending on if user is logged in or not
   renderDashboard() {
     if (this.props.location.pathname !== '/') {
-      return this.state.loggedIn ? <DashboardNavbar history={this.props.history} logOut={this.logOut}></DashboardNavbar> : <NavBar></NavBar>
+      return this.state.loggedIn ? <DashboardNavbar history={this.props.history} logOut={this.logOut}></DashboardNavbar> : <NavBar history={this.props.history} ></NavBar>
     }
+  }
+
+  // elevatedPermissions(): returns true if administator or manager is logged in
+  elevatedPermissions() {
+    return this.state.loggedIn && (this.state.permissions === 'ADMINISTRATOR' || this.state.permissions === 'MANAGER');
   }
 
   // render(): render component
