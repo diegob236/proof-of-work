@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+
 import './Login.css';
 
 const axios = require('axios')
 const uuidv3 = require('uuid/v3');
 
-export default class Login extends Component {
+
+// Login: login page component
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,16 +17,19 @@ export default class Login extends Component {
     };
   }
 
+  // validateForm(): check for valid email
   validateForm() {
     return this.state.email.length > 0;
   }
 
+  // handleChange(): update state
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
+  // handleSubmit(): send log in request to server
   handleSubmit = event => {
     event.preventDefault();
     axios({
@@ -34,7 +40,7 @@ export default class Login extends Component {
       console.log(response);
       if (response.status === 200) {
         this.setState({invalid: false});
-        this.props.logIn(this.state.email);
+        this.props.logIn(this.state.email, response.data.type);
       }
       else {
         this.setState({invalid: true})
@@ -46,12 +52,14 @@ export default class Login extends Component {
     })
   }
 
+  // displayError(): display error for invalid user
   displayError() {
     if (this.state.invalid) {
       return <div className ='error'>User not found.</div>
     }
   }
 
+  // render(): render component
   render() {
     return (
       <div className="Login">
@@ -79,3 +87,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;

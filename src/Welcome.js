@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
+
 import './Welcome.css';
 
 
+// Welcome: homepage component
 class Welcome extends Component {
   render() {
     return (

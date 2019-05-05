@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 
-import Welcome from './Welcome';
-import Scanner from './Scanner';
-import Login from './Login';
-import Signup from './SignUp';
 import Dashboard from './Dashboard';
 import DashboardNavbar from './DashboardNavbar';
+import Login from './Login';
 import NavBar from './Navbar';
 import Resume from './Resume'
+import PrivateRoute from './PrivateRoute';
+import Scanner from './Scanner';
+import Signup from './SignUp';
+import Welcome from './Welcome';
+
 import store from './redux/store'
 import loginAction from './redux/loginAction';
 
 import './App.css';
 
 
-function PrivateRoute ({component: Component, authed, ...rest}) {
-  return (
-    <Route
-      {...rest}
-      render={(props) => authed === true
-        ? <Component {...props} {...rest} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
-    />
-  )
-}
-
+// App: main component
 class App extends Component {
 
+  // Constructor
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      loggedIn: false
+      loggedIn: false,
+      permissions: 'UNEMPLOYED'
     }
     store.subscribe(() => {
       this.setState(store.getState());
@@ -41,24 +35,28 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
   }
 
-  logIn(email) {
-    this.setState({email: email, loggedIn: true}, () => {console.log(this.state)});
+  // logIn(): authenticate user and take them to the dashboard
+  logIn(email, permissions) {
+    this.setState({email: email, loggedIn: true, permissions: permissions}, () => {console.log(this.state)});
     store.dispatch(loginAction(this.state));
     this.props.history.push("/dashboard");
   }
 
+  // logOut(): log out user and take them to the welcome screen
   logOut() {
-    this.setState({email: '', loggedIn: false}, () => {console.log(this.state)});
-    store.dispatch(loginAction({email: '', loggedIn: false}));
+    this.setState({email: '', loggedIn: false, permissions: 'UNEMPLOYED'}, () => {console.log(this.state)});
+    store.dispatch(loginAction({email: '', loggedIn: false, permissions: 'UNEMPLOYED'}));
     this.props.history.push("/");
   }
 
+  // renderDashboard(): display different dashboard depending on if user is logged in or not
   renderDashboard() {
     if (this.props.location.pathname !== '/') {
       return this.state.loggedIn ? <DashboardNavbar history={this.props.history} logOut={this.logOut}></DashboardNavbar> : <NavBar></NavBar>
     }
   }
 
+  // render(): render component
   render() {
     return (
       <div className="App">

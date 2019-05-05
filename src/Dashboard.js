@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
-
 import store from './redux/store'
 import Resume from './Resume.js'
 
@@ -10,13 +9,16 @@ const axios = require('axios');
 const uuidv3 = require('uuid/v3');
 
 
+// Dashboard component
 class Dashboard extends Component {
 
+  // Constructor
   constructor(props) {
     super(props);
     this.getResume = this.getResume.bind(this);
   }
 
+  // getResume(): query server for your work experience
   getResume() {
     axios({
       method: 'get',
@@ -31,14 +33,25 @@ class Dashboard extends Component {
     })
   }
 
+  // renderManagerButtons(): display manager actions if above required permission level
+  renderManagerButtons() {
+    if (store.getState().permissions === 'MANAGER' ||
+        store.getState().permissions === 'ADMINISTRATOR') {
+      return <React.Fragment>
+              <Button className="menubutton" variant="dark">Hire Employee</Button> 
+              <Button className="menubutton" variant="dark">Terminate Employee</Button>
+            </React.Fragment>
+    }
+  }
+
+  // render(): render component
   render() {
     return (
       <div className="Dashboard">
         <h1>Welcome back, {store.getState().email}!</h1>
         <Button className="menubutton" variant="dark" onClick={() => this.getResume()}>My Resume</Button>
         <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/scan')}>Scan Resume</Button>
-        <Button className="menubutton" variant="dark">Hire Employee</Button>
-        <Button className="menubutton" variant="dark">Terminate Employee</Button>
+        {this.renderManagerButtons()}
         <Button className="menubutton" variant="dark">Create Company</Button>
         <Button className="menubutton" variant="dark">Quit Job</Button>
       </div>
