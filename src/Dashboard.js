@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 
 import store from './redux/store'
+import Resume from './Resume.js'
 
 import './Dashboard.css';
 
