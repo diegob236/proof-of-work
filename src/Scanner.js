@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-reader'
 import './Scanner.css'
-import NavBar from './Navbar';
 import Resume from './Resume'
-import DashboardNavbar from './DashboardNavbar';
  
 
 const axios = require('axios');
@@ -13,8 +11,7 @@ class Scanner extends Component {
     super(props)
     this.state = {
       result: [],
-      hasScanned: false,
-      loggedIn: false
+      hasScanned: false
     }
     this.handleScan = this.handleScan.bind(this);
   }
@@ -37,13 +34,6 @@ class Scanner extends Component {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.loggedIn != prevState.loggedIn) {
-      return {loggedIn: nextProps.loggedIn};
-    }
-    else return null;
-  }
-
   render() {
     const hasScanned = this.state.hasScanned;
     let viewable;
@@ -60,7 +50,6 @@ class Scanner extends Component {
     }
     return (
       <div className="Scanner">
-        { this.state.loggedIn ? <DashboardNavbar logOut={this.props.logOut}></DashboardNavbar> : <NavBar></NavBar> }
         {viewable}
       </div>
     )
