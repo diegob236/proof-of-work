@@ -70,67 +70,63 @@ class NewCompany extends Component {
   // render(): render component
   render() {
     return(
-      <div>
-        <NavBar></NavBar>
-        <div className='NewCompany'>
-          <h2>Create Company</h2>
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId='name'>
-              <ControlLabel>Name</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="name"
-                  value={this.state.name}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId='description'>
-              <ControlLabel>Description</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="description"
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId='location'>
-              <ControlLabel>Location</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="location"
-                  value={this.state.location}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId='email'>
-              <ControlLabel>Company Email Adress</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            
-            <FormGroup controlId='phone'>
-              <ControlLabel>Phone Number</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="phone"
-                  value={this.state.phone}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <Button
-                block
-                bsSize="large"
-                disabled={!this.validateForm()}
-                type="submit"
-              >
-                Create
-            </Button>
-          </form>
-        </div>
+      <div className='NewCompany'>
+        <h2>Create Company</h2>
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId='name'>
+            <ControlLabel>Name</ControlLabel>
+            <FormControl
+                autoFocus
+                type="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <FormGroup controlId='description'>
+            <ControlLabel>Description</ControlLabel>
+            <FormControl
+                autoFocus
+                type="description"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <FormGroup controlId='location'>
+            <ControlLabel>Location</ControlLabel>
+            <FormControl
+                autoFocus
+                type="location"
+                value={this.state.location}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <FormGroup controlId='email'>
+            <ControlLabel>Email Address</ControlLabel>
+            <FormControl
+                autoFocus
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <FormGroup controlId='phone'>
+            <ControlLabel>Phone Number</ControlLabel>
+            <FormControl
+                autoFocus
+                type="phone"
+                value={this.state.phone}
+                onChange={this.handleChange}
+              />
+          </FormGroup>
+          <Button
+              block
+              bsSize="large"
+              disabled={!this.validateForm()}
+              type="submit"
+            >
+              Create
+          </Button>
+        </form>
       </div>
     );
   }
