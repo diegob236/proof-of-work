@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import store from './redux/store';
 
 import './NewCompany.css';
@@ -72,52 +72,52 @@ class NewCompany extends Component {
     return(
       <div className='NewCompany'>
         <h2>Create Company</h2>
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId='name'>
-            <ControlLabel>Name</ControlLabel>
-            <FormControl
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId='name'>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
                 autoFocus
                 type="name"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='description'>
-            <ControlLabel>Description</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='description'>
+            <Form.Label>Description</Form.Label>
+            <Form.Control
                 autoFocus
                 type="description"
                 value={this.state.description}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='location'>
-            <ControlLabel>Location</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='location'>
+            <Form.Label>Location</Form.Label>
+            <Form.Control
                 autoFocus
                 type="location"
                 value={this.state.location}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='email'>
-            <ControlLabel>Email Address</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='email'>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
                 autoFocus
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='phone'>
-            <ControlLabel>Phone Number</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='phone'>
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control
                 autoFocus
                 type="phone"
                 value={this.state.phone}
                 onChange={this.handleChange}
               />
-          </FormGroup>
+          </Form.Group>
           <Button
               block
               bsSize="large"
@@ -126,7 +126,7 @@ class NewCompany extends Component {
             >
               Create
           </Button>
-        </form>
+        </Form>
       </div>
     );
   }

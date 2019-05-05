@@ -62,7 +62,7 @@ class Fire extends Component {
         <DashboardNavbar></DashboardNavbar>
         <div className='Hire'>
           <h2>Hire Employee</h2>
-          <form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup controlId='jobTitle'>
               <ControlLabel>Job Title</ControlLabel>
               <FormControl
@@ -122,7 +122,7 @@ class Fire extends Component {
               >
                 Create
             </Button>
-          </form>
+          </Form>
         </div>
       </div>
     );

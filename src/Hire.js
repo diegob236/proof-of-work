@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import './Hire.css'
 import store from "./redux/store";
@@ -71,28 +71,28 @@ class Hire extends Component {
       <div className='Hire'>
         <h2>Hire Employee</h2>
         <br></br>
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId='jobTitle'>
-            <ControlLabel>Job Title</ControlLabel>
-            <FormControl
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId='jobTitle'>
+            <Form.Label>Job Title</Form.Label>
+            <Form.Control
                 autoFocus
                 type="jobTitle"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='email'>
-            <ControlLabel>New Employee's Email Address</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='email'>
+            <Form.Label>New Employee's Email Address</Form.Label>
+            <Form.Control
                 autoFocus
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId="type">
-            <ControlLabel>Job Type</ControlLabel>
-            <FormControl 
+          </Form.Group>
+          <Form.Group controlId="type">
+            <Form.Label>Job Type</Form.Label>
+            <Form.Control 
               autoFocus
               type="type"
               ref={select => {this.select = select}}
@@ -103,26 +103,26 @@ class Hire extends Component {
                 <option value="ADMINISTRATOR">ADMINISTRATOR</option>
                 <option value="MANAGER">MANAGER</option>
                 <option value="WORKER">WORKER</option>
-            </FormControl>
-          </FormGroup>
-          <FormGroup controlId='description'>
-            <ControlLabel>Description</ControlLabel>
-            <FormControl
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId='description'>
+            <Form.Label>Description</Form.Label>
+            <Form.Control
                 autoFocus
                 type="description"
                 value={this.state.description}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='location'>
-            <ControlLabel>Location</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='location'>
+            <Form.Label>Location</Form.Label>
+            <Form.Control
                 autoFocus
                 type="location"
                 value={this.state.location}
                 onChange={this.handleChange}
               />
-          </FormGroup>
+          </Form.Group>
           <Button
               block
               bsSize="large"
@@ -131,7 +131,7 @@ class Hire extends Component {
             >
               Create
           </Button>
-        </form>
+        </Form>
       </div>
     );
   }

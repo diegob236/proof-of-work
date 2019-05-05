@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import "./SignUp.css";
 
@@ -67,44 +67,44 @@ class Signup extends Component {
   render() {
     return(
       <div className='SignUp'>
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId='name'>
-            <ControlLabel>Name</ControlLabel>
-            <FormControl
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId='name'>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
                 autoFocus
                 type="name"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='email'>
-            <ControlLabel>Email Address</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='email'>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
                 autoFocus
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='phone'>
-            <ControlLabel>Phone Number</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='phone'>
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control
                 autoFocus
                 type="phone"
                 value={this.state.phone}
                 onChange={this.handleChange}
               />
-          </FormGroup>
-          <FormGroup controlId='DOB'>
-            <ControlLabel>Date of Birth</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId='DOB'>
+            <Form.Label>Date of Birth</Form.Label>
+            <Form.Control
                 autoFocus
                 type="DOB"
                 value={this.state.DOB}
                 placeholder='YYYY-MM-DD'
                 onChange={this.handleChange}
               />
-          </FormGroup>
+          </Form.Group>
           <Button
               block
               bsSize="large"
@@ -113,7 +113,7 @@ class Signup extends Component {
             >
               Sign Up
           </Button>
-        </form>
+        </Form>
       </div>
     );
   }

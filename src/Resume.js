@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {ListGroup, Jumbotron} from'react-bootstrap'
+import {ListGroup} from'react-bootstrap'
+import Card from 'react-bootstrap/Card'
 
 import store from './redux/store';
 
@@ -88,6 +89,17 @@ class Resume extends Component{
       let job = this.state.jobList[i]
       jobs.push(
         <div key={job.startDate} as="li">
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+              <Card.Text>
+                here
+              </Card.Text>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
           <h3>{job.jobTitle}</h3>
         </div>
       )

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import './Login.css';
 
@@ -64,15 +64,15 @@ class Login extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
+          <Form.Group controlId="email" bsSize="large">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
               autoFocus
               type="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
-          </FormGroup>
+          </Form.Group>
           <Button
             block
             bsSize="large"
