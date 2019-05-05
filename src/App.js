@@ -3,6 +3,7 @@ import { Route, withRouter } from "react-router-dom";
 
 import Dashboard from './Dashboard';
 import DashboardNavbar from './DashboardNavbar';
+import Hire from './Hire';
 import Login from './Login';
 import ManageEmployees from './ManageEmployees';
 import NavBar from './Navbar';
@@ -34,6 +35,7 @@ class App extends Component {
     });
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.elevatedPermissions = this.elevatedPermissions.bind(this);
   }
 
   // logIn(): authenticate user and take them to the dashboard
@@ -57,6 +59,11 @@ class App extends Component {
     }
   }
 
+  // elevatedPermissions(): returns true if administator or manager is logged in
+  elevatedPermissions() {
+    return this.state.loggedIn && (this.state.permissions === 'ADMINISTRATOR' || this.state.permissions === 'MANAGER');
+  }
+
   // render(): render component
   render() {
     return (
@@ -68,8 +75,8 @@ class App extends Component {
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
         <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
         <PrivateRoute authed={this.state.loggedIn} path='/resume' component={Resume} />
-        <PrivateRoute authed={this.state.loggedIn && (this.state.permissions === 'ADMINISTRATOR'
-        || this.state.permissions === 'MANAGER')} path='/manageemployees' component={ManageEmployees} />
+        <PrivateRoute authed={this.elevatedPermissions()} path='/manageemployees' component={ManageEmployees} />
+        <PrivateRoute authed={this.elevatedPermissions()} path='/hire' component={Hire} />
       </div>
     );
   }
