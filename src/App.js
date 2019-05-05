@@ -16,7 +16,7 @@ function PrivateRoute ({component: Component, authed, ...rest}) {
     <Route
       {...rest}
       render={(props) => authed === true
-        ? <Component {...props} />
+        ? <Component {...props} {...rest} />
         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
     />
   )
@@ -33,20 +33,29 @@ class App extends Component {
   }
 
   logIn(email) {
-    this.setState({email: email, loggedIn: true})
-    console.log(this.state)
-    this.props.history.push("/dashboard")
+    this.setState({email: email, loggedIn: true}, () => {console.log(this.state)});
+    this.props.history.push("/dashboard");
+  }
+
+  logOut() {
+    this.setState({email: '', loggedIn: false}, () => {console.log(this.state)});
+    this.props.history.push("/");
+  }
+
+  loggedIn() {
+    console.log(this.state.loggedIn);
+    return this.state.loggedIn;
   }
 
   render() {
     return (
       <div className="App">
-        <p>{uuidv3('jimmy@.com', uuidv3.URL)}</p>
+        {console.log(this.state)}
         <Route path="/" exact component={Welcome} />
-        <Route path="/scan" component={Scanner} />
-        <Route path="/login" render={props => <Login logIn = {this.logIn.bind(this)} />} />
-        <Route path="/signup" render={props => <Signup logIn = {this.logIn.bind(this)} />} />
-        <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
+        <Route path="/scan" render={props => <Scanner loggedIn={this.loggedIn.bind(this)} logOut={this.logOut.bind(this)} />} />
+        <Route path="/login" render={props => <Login logIn={this.logIn.bind(this)} />} />
+        <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
+        <PrivateRoute authed={this.state.loggedIn} logOut={this.logOut.bind(this)} email={this.state.email} path='/dashboard' component={Dashboard} />
       </div>
     );
   }
