@@ -1,29 +1,106 @@
-import React, { Component } from 'react'
-import Job from './Job.js'
-import NavBar from './Navbar';
+import React, { Component } from 'react';
+import {ListGroup, Jumbotron} from'react-bootstrap'
+
+import store from './redux/store';
 
 import './Resume.css'
+
+const axios = require('axios');
+const uuidv3 = require('uuid/v3');
 
 
 // Resume: gets work experience data
 class Resume extends Component{
 
   // Constructor
-  constructor(props, jobList){
+  constructor(props){
     super(props);
     this.state = {
-      jobs: jobList
+      jobList : [],
+      companyList: []
+    };
+    this.getResume = this.getResume.bind(this);
+    this.renderJobs = this.renderJobs.bind(this);
+    this.populateJobData = this.populateJobData.bind(this);
+    this.getCompanyData = this.getCompanyData.bind(this);
+  }
+
+  // componentDidMount(): send GET request to get data
+  async componentDidMount() {
+    await this.getResume();
+  }
+
+  // getResume(): query server for your work experience
+  getResume() {
+    console.log(store.getState().email)
+    var uId = uuidv3(store.getState().email, uuidv3.URL);
+    axios({
+      method: 'get',
+      url: 'http://157.230.172.148:3000/api/queries/workExperience?uIDParam=resource%3Aorg.pow.app.User%23'+uId
+    })
+    .then((response) => {
+      console.log(response.data);
+      this.populateJobData(response.data);
+      this.setState({
+        jobList: response.data
+      }); 
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log('No jobs found for ' + store.getState().email);
+    })
+  }
+
+  async getCompanyData(companyID){
+    var join = "Error"
+    axios({
+      method: 'get',
+      url: 'http://157.230.172.148:3000/api/Company/'+companyID
+    })
+    .then((response) => {
+      console.log(response.data);
+      join = this.state.companyList.concat(response.data) 
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('No jobs found for ' + store.getState().email);
+    });
+    await this.setState({
+      companyList: join
+    });
+  }
+
+  async populateJobData(data){
+    let jobs = []
+    for (let i = 0; i < data.length; i++){
+      console.log(data[i].company.companyID);
+      this.getCompanyData(data[i].company.companyID);
+      jobs.push(data[i]);
     }
+    await this.setState({jobList: jobs});
+  }
+
+  renderJobs() {
+    console.log(this.state.jobList)
+    let jobs = []
+    jobs.push(<h1>Verified Resume</h1>)
+    for (let i = 0; i < this.state.jobList.length; i++){
+      let job = this.state.jobList[i]
+      jobs.push(
+        <div key={job.startDate} as="li">
+          <h3>{job.jobTitle}</h3>
+        </div>
+      )
+    }
+    return <ListGroup as="ul">{jobs}</ListGroup>
   }
 
   // render(): render component
   render() {
-    const jobs = this.jobs.map((job) =>
-      <Job jobData={job}></Job>
-    )
+    console.log(this.state.jobList)
     return (
       <div>
-        <ul>{jobs}</ul>
+          {this.renderJobs()}
       </div>
     );
   }

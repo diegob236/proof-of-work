@@ -101,7 +101,7 @@ class NewCompany extends Component {
                 />
             </FormGroup>
             <FormGroup controlId='email'>
-              <ControlLabel>Email Adress</ControlLabel>
+              <ControlLabel>Company Email Adress</ControlLabel>
               <FormControl
                   autoFocus
                   type="email"
@@ -116,16 +116,6 @@ class NewCompany extends Component {
                   autoFocus
                   type="phone"
                   value={this.state.phone}
-                  onChange={this.handleChange}
-                />
-            </FormGroup>
-            <FormGroup controlId='DOB'>
-              <ControlLabel>Date of Birth</ControlLabel>
-              <FormControl
-                  autoFocus
-                  type="DOB"
-                  value={this.state.DOB}
-                  placeholder='YYYY-MM-DD'
                   onChange={this.handleChange}
                 />
             </FormGroup>

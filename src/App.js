@@ -65,8 +65,8 @@ class App extends Component {
         <Route path="/scan" render={props => <Scanner />} />
         <Route path="/login" render={props => <Login logIn={this.logIn.bind(this)} />} />
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
-        <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
-        <PrivateRoute authed={this.state.loggedIn} path='/dashboard/resume' component={Resume} />
+        <PrivateRoute authed={this.state.loggedIn} history={this.props.history} path='/dashboard' component={Dashboard} />
+        <PrivateRoute authed={this.state.loggedIn} path='/resume' component={Resume} />
       </div>
     );
   }
