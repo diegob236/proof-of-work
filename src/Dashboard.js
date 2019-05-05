@@ -37,6 +37,8 @@ class Dashboard extends Component {
           <Button className="menubutton" variant="dark" href="/scan">Scan Resume</Button>
           <Button className="menubutton" variant="dark">Hire Employee</Button>
           <Button className="menubutton" variant="dark">Terminate Employee</Button>
+          <Button className="menubutton" variant="dark">Create Company</Button>
+          <Button className="menubutton" variant="dark">Quit Job</Button>
         </div>
       </div>
     );
