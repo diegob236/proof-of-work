@@ -23,7 +23,7 @@ class ManageEmployees extends Component{
   getEmployees() {
     axios({
       method: 'get',
-      url: 'http://157.230.172.148:3000/api/queries/findJobs/?managerID=resource:org.pow.app.User#' + uuidv3(store.getState().email, uuidv3.URL)
+      url: 'http://157.230.172.148:3000/api/queries/findJobs?managerID=resource%3Aorg.pow.app.User%23' + uuidv3(store.getState().email, uuidv3.URL)
     })
     .then((response) => {
       console.log(response);
