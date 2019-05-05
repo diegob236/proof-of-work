@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
-
 import store from './redux/store'
 
 import './Dashboard.css';
@@ -9,13 +8,16 @@ const axios = require('axios');
 const uuidv3 = require('uuid/v3');
 
 
+// Dashboard component
 class Dashboard extends Component {
 
+  // Constructor
   constructor(props) {
     super(props);
     this.getResume = this.getResume.bind(this);
   }
 
+  // getResume(): query server for your work experience
   getResume() {
     axios({
       method: 'get',
@@ -30,6 +32,7 @@ class Dashboard extends Component {
     })
   }
 
+  // render(): render component
   render() {
     return (
       <div className="Dashboard">

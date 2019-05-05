@@ -6,10 +6,13 @@ import "./SignUp.css";
 const axios = require('axios');
 const uuidv3 = require('uuid/v3');
 
+
+// Signup: registration component
 class Signup extends Component {
+
+  // Constructor
   constructor(props) {
     super(props);
-
     this.state = {
       name: "",
       email: "",
@@ -18,6 +21,7 @@ class Signup extends Component {
     };
   }
 
+  // validateForm(): check for valid input
   validateForm() {
     return this.state.email.length > 0 &&
       this.state.name.length > 0 &&
@@ -25,13 +29,14 @@ class Signup extends Component {
       this.state.phone.length > 9;
   }
 
+  // handleChange(): update state
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
-
+  // handleSubmit(): post data to server
   handleSubmit = event => {
     var hash = uuidv3(this.state.email, uuidv3.URL)
     var date = this.state.DOB +'T00:00:00.000Z'
@@ -57,6 +62,7 @@ class Signup extends Component {
       })
     }
 
+  // render(): render component
   render() {
     return(
       <div className='SignUp'>
@@ -79,7 +85,6 @@ class Signup extends Component {
                 onChange={this.handleChange}
               />
           </FormGroup>
-          
           <FormGroup controlId='phone'>
             <ControlLabel>Phone Number</ControlLabel>
             <FormControl

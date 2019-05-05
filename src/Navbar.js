@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Navbar, Button, ButtonToolbar } from "react-bootstrap";
+
 import './Navbar.css'
 
+
+// Navbar: navbar component
 class NavBar extends Component {
   render() {
     return (
