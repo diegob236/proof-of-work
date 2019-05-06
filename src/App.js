@@ -56,7 +56,9 @@ class App extends Component {
   // renderDashboard(): display different dashboard depending on if user is logged in or not
   renderDashboard() {
     if (this.props.location.pathname !== '/') {
-      return this.state.loggedIn ? <DashboardNavbar history={this.props.history} logOut={this.logOut}></DashboardNavbar> : <NavBar history={this.props.history} ></NavBar>
+      return this.state.loggedIn 
+        ? <DashboardNavbar history={this.props.history} logOut={this.logOut}></DashboardNavbar> 
+        : <NavBar history={this.props.history} location={this.props.location}></NavBar>
     }
   }
 

@@ -11,9 +11,9 @@ class NavBar extends Component {
       <Navbar style={{ background: '#222222' }}>
         <ButtonToolbar className = 'toolbar'>
           <Button className="btn pull-left" variant="dark" onClick={() => {this.props.history.push("/")}}>Home</Button>
-          <Button className="btn pull-right" variant="dark" onClick={() => {this.props.history.push("/scan")}}>Scan</Button>
-          <Button className="btn pull-right" variant="dark" onClick={() => {this.props.history.push("/login")}}>Log in</Button>
-          <Button className="btn pull-right" variant="dark" onClick={() => {this.props.history.push("/signup")}}>Sign Up</Button>
+          {this.props.location.pathname !== '/scan' ? <Button className="btn pull-right" variant="dark" onClick={() => {this.props.history.push("/scan")}}>Scan</Button> : null}
+          {this.props.location.pathname !== '/login' ? <Button className="btn pull-right" variant="dark" onClick={() => {this.props.history.push("/login")}}>Log in</Button> : null}
+          {this.props.location.pathname !== '/signup' ? <Button className="btn pull-right" variant="dark" onClick={() => {this.props.history.push("/signup")}}>Sign Up</Button> : null}
         </ButtonToolbar>
       </Navbar>
     );
