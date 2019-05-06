@@ -63,8 +63,9 @@ class Scanner extends Component {
       />;
     }
     return (
-      <div className="Scanner">
-        {viewable}
+      <div style={{padding: '100px'}}>
+        <h1>404</h1>
+        <h2>This feature is on its way soon. Stay tuned!</h2>
       </div>
     )
   }

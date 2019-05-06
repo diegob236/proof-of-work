@@ -18,6 +18,7 @@ import store from './redux/store'
 import loginAction from './redux/loginAction';
 
 import './App.css';
+import QRCode from './QRCode';
 
 
 // App: main component
@@ -81,6 +82,7 @@ class App extends Component {
         <PrivateRoute authed={store.getState().loggedIn} history={this.props.history} path='/createcompany' component={NewCompany} />
         <PrivateRoute authed={this.elevatedPermissions()} history={this.props.history} path='/hire' component={Hire} />
         <PrivateRoute authed={this.elevatedPermissions()} path='/manageemployees' component={ManageEmployees} />
+        <PrivateRoute authed={store.getState().loggedIn} path='/qr' component={QRCode} />
       </div>
     );
   }
