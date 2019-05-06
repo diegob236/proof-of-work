@@ -83,7 +83,6 @@ class Resume extends Component{
     let jobs = []
     let companies = []
     for (let i = 0; i < data.length; i++){
-      console.log(data[i].company.companyID);
       companies.push(data[i].company);
       jobs.push(data[i]);
     }
@@ -95,7 +94,6 @@ class Resume extends Component{
 
   // renderJobs(): renders jobs organized in card format
   renderJobs() {
-    console.log(this.state.jobList)
     let jobs = []
     jobs.push()
     for (let i = 0; i < this.state.jobList.length; i++){
@@ -128,7 +126,6 @@ class Resume extends Component{
 
   // render(): render component
   render() {
-    console.log(this.state.jobList);
     return (
       <div key="Resume">
         <div key="header">

@@ -48,7 +48,6 @@ class Signup extends Component {
       DOB: date,
       phone: this.state.phone
     }
-    alert(JSON.stringify(user))
     axios({
       method: 'post',
       url: 'http://157.230.172.148:3000/api/User',
