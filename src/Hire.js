@@ -63,6 +63,7 @@ class Hire extends Component {
     .catch((error) => {
       console.log(error);
     })
+    this.props.history.push("/dashboard");
   }
 
   // render(): render component

@@ -64,7 +64,7 @@ class App extends Component {
 
   // elevatedPermissions(): returns true if administator or manager is logged in
   elevatedPermissions() {
-    return this.state.loggedIn && (this.state.permissions === 'ADMINISTRATOR' || this.state.permissions === 'MANAGER');
+    return store.getState().loggedIn && (store.getState().permissions === 'ADMINISTRATOR' || store.getState().permissions === 'MANAGER');
   }
 
   // render(): render component
@@ -76,10 +76,10 @@ class App extends Component {
         <Route path="/scan" render={props => <Scanner />} />
         <Route path="/login" render={props => <Login logIn={this.logIn.bind(this)} />} />
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
-        <PrivateRoute authed={this.state.loggedIn} path='/dashboard' component={Dashboard} />
-        <PrivateRoute authed={this.state.loggedIn} path='/resume' component={Resume} />
-        <PrivateRoute authed={this.state.loggedIn} path='/createcompany' component={NewCompany} />
-        <PrivateRoute authed={this.elevatedPermissions()} path='/hire' component={Hire} />
+        <PrivateRoute authed={store.getState().loggedIn} path='/dashboard' component={Dashboard} />
+        <PrivateRoute authed={store.getState().loggedIn} history={this.props.history} path='/resume' component={Resume} />
+        <PrivateRoute authed={store.getState().loggedIn} history={this.props.history} path='/createcompany' component={NewCompany} />
+        <PrivateRoute authed={this.elevatedPermissions()} history={this.props.history} path='/hire' component={Hire} />
         <PrivateRoute authed={this.elevatedPermissions()} path='/manageemployees' component={ManageEmployees} />
       </div>
     );
