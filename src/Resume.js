@@ -104,7 +104,7 @@ class Resume extends Component{
           <Card style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Title>{job.jobTitle}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">{company.name}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">{job.type + ' at '+company.name}</Card.Subtitle>
               <Card.Text>
                 {job.description}
               </Card.Text>
