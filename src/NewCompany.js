@@ -65,6 +65,7 @@ class NewCompany extends Component {
       .catch(function (error){
         console.log(error);
       })
+      this.props.history.push("/dashboard");
     }
 
   // render(): render component
@@ -121,7 +122,7 @@ class NewCompany extends Component {
           </Form.Group>
           <Button
               block
-              bsSize="large"
+              bssize="large"
               disabled={!this.validateForm()}
               type="submit"
             >

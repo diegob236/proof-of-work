@@ -77,9 +77,9 @@ class App extends Component {
         <Route path="/login" render={props => <Login logIn={this.logIn.bind(this)} />} />
         <Route path="/signup" render={props => <Signup logIn={this.logIn.bind(this)} />} />
         <PrivateRoute authed={store.getState().loggedIn} path='/dashboard' component={Dashboard} />
-        <PrivateRoute authed={store.getState().loggedIn} path='/resume' component={Resume} />
-        <PrivateRoute authed={store.getState().loggedIn} path='/createcompany' component={NewCompany} />
-        <PrivateRoute authed={this.elevatedPermissions()} path='/hire' component={Hire} />
+        <PrivateRoute authed={store.getState().loggedIn} history={this.props.history} path='/resume' component={Resume} />
+        <PrivateRoute authed={store.getState().loggedIn} history={this.props.history} path='/createcompany' component={NewCompany} />
+        <PrivateRoute authed={this.elevatedPermissions()} history={this.props.history} path='/hire' component={Hire} />
         <PrivateRoute authed={this.elevatedPermissions()} path='/manageemployees' component={ManageEmployees} />
       </div>
     );

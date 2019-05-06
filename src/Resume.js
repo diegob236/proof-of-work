@@ -54,14 +54,17 @@ class Resume extends Component{
   }
 
   // handleQuit(): submit request to quit job
-  handleQuit(job){
+  handleQuit = event =>{
+    let job = event.target.value;
+    console.log(job)
     let quitData = {
       $class: "org.pow.app.quit",
-      job: job.jobID,
-      employee: job.employee
+      job: job,
+      employee: 'resource:org.pow.app.User#' + uuidv3(store.getState().email, uuidv3.URL)
     }
+    console.log(quitData)
     axios({
-      method: 'get',
+      method: 'post',
       url: 'http://157.230.172.148:3000/api/quit',
       data: quitData
     })
@@ -76,6 +79,7 @@ class Resume extends Component{
       console.log(error);
       console.log('No jobs found for ' + store.getState().email);
     })
+    this.props.history.push("/dashboard");
   }
 
   // populateJobData(): populates job and company data
@@ -104,7 +108,7 @@ class Resume extends Component{
           <Card style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Title>{job.jobTitle}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">{company.name}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">{job.type + ' at '+company.name}</Card.Subtitle>
               <Card.Text>
                 {job.description}
               </Card.Text>
@@ -115,7 +119,7 @@ class Resume extends Component{
                 End Date: {typeof(job.endDate) === 'undefined' ?  'Current' : job.startDate.split('T')[0]}
               </Card.Text>
               {typeof(job.endDate) !== 'undefined' ?  '' : 
-              <Button variant="danger" onClick={this.handleQuit}>Quit</Button>}
+              <Button variant="danger" value={job.jobID} onClick={this.handleQuit}>Quit</Button>}
             </Card.Body>
           </Card>
         </div>
