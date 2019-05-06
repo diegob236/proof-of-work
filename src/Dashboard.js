@@ -34,7 +34,7 @@ class Dashboard extends Component {
         <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/scan')}>Scan Resume</Button>
         {this.renderManagerButtons()}
         <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/createcompany')}>Create Company</Button>
-        <Button className="menubutton" variant="dark">Quit Job</Button>
+        <Button className="menubutton" variant="dark">Generate QR Code</Button>
       </div>
     );
   }

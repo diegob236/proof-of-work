@@ -24,7 +24,7 @@ class Resume extends Component{
     this.getResume = this.getResume.bind(this);
     this.renderJobs = this.renderJobs.bind(this);
     this.populateJobData = this.populateJobData.bind(this);
-    this.handleQuit = this.handleQuit.bind(this)
+    this.handleQuit = this.handleQuit.bind(this);
   }
 
   // componentDidMount(): send GET request to get data
@@ -94,7 +94,7 @@ class Resume extends Component{
   }
 
   // renderJobs(): renders jobs organized in card format
-  async renderJobs() {
+  renderJobs() {
     console.log(this.state.jobList)
     let jobs = []
     jobs.push()
@@ -136,8 +136,8 @@ class Resume extends Component{
           <h2>Verified Resume:</h2>
           <br></br>
         </div>
-        <CardGroup>
-          {this.renderJobs}
+        <CardGroup className="resume-cards">
+          {this.renderJobs()}
         </CardGroup>
       </div>  
     );
