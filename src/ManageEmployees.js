@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CardGroup } from 'react-bootstrap';
+import { Button, CardGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import store from './redux/store'
 
@@ -64,7 +64,8 @@ class ManageEmployees extends Component{
     let jobs = [];
     let employees = [];
     for (let i = 0; i < data.length; i++){
-      if (data[i].employee !== 'resource:org.pow.app.User#' + uuidv3(store.getState().email, uuidv3.URL)) {
+      if (data[i].employee !== 'resource:org.pow.app.User#' + uuidv3(store.getState().email, uuidv3.URL) &&
+            typeof(data[i].endDate) === 'undefined') {
         await this.getEmployeeData(data[i].employee.split('#')[1]);
         jobs.push(data[i]);
       }
@@ -74,27 +75,49 @@ class ManageEmployees extends Component{
     });
   }
 
+  // handleTerminate(): terminate/fire an employee
+  handleTerminate(job){
+    let terminateData = {
+      "$class": "org.pow.app.terminate",
+      "job": job,
+      "manager": uuidv3(store.getState().email, uuidv3.URL),
+      "employee": job.employee
+    }
+    axios({
+      method: 'post',
+      url: 'http://157.230.172.148:3000/api/terminate',
+      data: terminateData
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   // renderEmployees(): render employee data
   renderEmployees() {
     let employees = []
     for (let i = 0; i < this.state.employeeJobs.length; i++){
       console.log(this.state);
       let job = this.state.employeeJobs[i]
-      let employee = this.state.employeeData[i]
       employees.push(
         <div key={job.startDate} as="li">
           <Card style={{ width: '18rem' }}>
             <Card.Body>
-              <Card.Title>{employee.name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">{employee.email}</Card.Subtitle>
+              <Card.Title>{job.jobTitle}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">{job.company.name}</Card.Subtitle>
               <Card.Text>
-                {employee.phone}
+                {job.description}
               </Card.Text>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
+              <Card.Text>
+                {job.type}
+              </Card.Text>
+              {typeof(job.endDate) !== 'undefined' ?  '' : 
+              <Button variant="danger" onClick={this.handleTerminate}>Terminate</Button>}
             </Card.Body>
           </Card>
-          <h3>{job.jobTitle}</h3>
         </div>
       )
     }
@@ -109,7 +132,7 @@ class ManageEmployees extends Component{
         <h2>Your Employees:</h2>
         <br></br>
         <CardGroup className="employee-cards">
-          {this.state.employeeData === [] ? <div></div> : this.renderEmployees()}
+          {this.renderEmployees()}
         </CardGroup>
       </div>
     );
