@@ -53,8 +53,8 @@ class Resume extends Component{
     })
   }
 
+  // handleQuit(): submit request to quit job
   handleQuit(job){
-
     let quitData = {
       $class: "org.pow.app.quit",
       job: job.jobID,
@@ -78,6 +78,7 @@ class Resume extends Component{
     })
   }
 
+  // populateJobData(): populates job and company data
   async populateJobData(data){
     let jobs = []
     let companies = []
@@ -92,10 +93,11 @@ class Resume extends Component{
     });
   }
 
-  renderJobs() {
+  // renderJobs(): renders jobs organized in card format
+  async renderJobs() {
     console.log(this.state.jobList)
     let jobs = []
-    jobs.push(<div key="header"><br></br><h1>Verified Resume</h1><br></br></div>)
+    jobs.push()
     for (let i = 0; i < this.state.jobList.length; i++){
       let job = this.state.jobList[i]
       let company = this.state.companyList[i]
@@ -115,7 +117,7 @@ class Resume extends Component{
                 End Date: {typeof(job.endDate) === 'undefined' ?  'Current' : job.startDate.split('T')[0]}
               </Card.Text>
               {typeof(job.endDate) !== 'undefined' ?  '' : 
-              <Button variant="danger" onClick={this.handleQuit(job)}>Quit</Button>}
+              <Button variant="danger" onClick={this.handleQuit}>Quit</Button>}
             </Card.Body>
           </Card>
         </div>
@@ -126,10 +128,18 @@ class Resume extends Component{
 
   // render(): render component
   render() {
-    console.log(this.state.jobList)
+    console.log(this.state.jobList);
     return (
-      <CardGroup>{this.renderJobs}</CardGroup>
-          
+      <div key="Resume">
+        <div key="header">
+          <br></br>
+          <h2>Verified Resume:</h2>
+          <br></br>
+        </div>
+        <CardGroup>
+          {this.renderJobs}
+        </CardGroup>
+      </div>  
     );
   }
 }

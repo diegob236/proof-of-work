@@ -37,7 +37,9 @@ class ManageEmployees extends Component{
   render() {
     return (
       <div>
+        <br></br>
         <h2>Your Employees:</h2>
+        <br></br>
       </div>
     );
   }

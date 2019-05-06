@@ -71,7 +71,8 @@ class NewCompany extends Component {
   render() {
     return(
       <div className='NewCompany'>
-        <h2>Create Company</h2>
+        <h2>Create Company:</h2>
+        <br></br>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId='name'>
             <Form.Label>Name</Form.Label>

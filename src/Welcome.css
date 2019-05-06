@@ -8,7 +8,13 @@
   vertical-align: middle;
 }
 
+.btn-home {
+  width: 180px;
+  height: 50px;
+}
+
 .buttonGroup {
   vertical-align: middle;
-  align-items: center
+  align-items: center;
+  width: 250px;
 }

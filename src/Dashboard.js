@@ -29,6 +29,7 @@ class Dashboard extends Component {
     return (
       <div className="Dashboard">
         <h1>Welcome back, {store.getState().email}!</h1>
+        <br></br>
         <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/resume')}>My Resume</Button>
         <Button className="menubutton" variant="dark" onClick={() => this.props.history.push('/scan')}>Scan Resume</Button>
         {this.renderManagerButtons()}

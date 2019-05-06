@@ -69,7 +69,7 @@ class Hire extends Component {
   render() {
     return(
       <div className='Hire'>
-        <h2>Hire Employee</h2>
+        <h2>Hire Employee:</h2>
         <br></br>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId='jobTitle'>
