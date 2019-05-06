@@ -8,11 +8,6 @@ import './Dashboard.css';
 // Dashboard component
 class Dashboard extends Component {
 
-  // Constructor
-  constructor(props) {
-    super(props);
-  }
-
   // renderManagerButtons(): display manager actions if above required permission level
   renderManagerButtons() {
     if (store.getState().permissions === 'MANAGER' ||

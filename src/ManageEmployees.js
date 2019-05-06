@@ -21,6 +21,7 @@ class ManageEmployees extends Component{
     this.getEmployeeJobData = this.getEmployeeJobData.bind(this);
     this.populateEmployeeData = this.populateEmployeeData.bind(this);
     this.renderEmployees = this.renderEmployees.bind(this);
+    this.handleTerminate = this.handleTerminate.bind(this);
   }
 
   // componentDidMount(): send request to get employees
@@ -62,7 +63,6 @@ class ManageEmployees extends Component{
   // populateEmployeeData(): populate employee data variables from job and user list
   async populateEmployeeData(data) {
     let jobs = [];
-    let employees = [];
     for (let i = 0; i < data.length; i++){
       if (data[i].employee !== 'resource:org.pow.app.User#' + uuidv3(store.getState().email, uuidv3.URL) &&
             typeof(data[i].endDate) === 'undefined') {
@@ -76,16 +76,16 @@ class ManageEmployees extends Component{
   }
 
   // handleTerminate(): terminate/fire an employee
-  handleTerminate(job){
+  handleTerminate = event => {
+    let job = JSON.parse(event.target.value);
     let terminateData = {
-      "$class": "org.pow.app.terminate",
-      "job": job,
-      "manager": uuidv3(store.getState().email, uuidv3.URL),
-      "employee": job.employee
+      $class: "org.pow.app.quit",
+      job: job.jobID,
+      employee: job.employee
     }
     axios({
       method: 'post',
-      url: 'http://157.230.172.148:3000/api/terminate',
+      url: 'http://157.230.172.148:3000/api/quit',
       data: terminateData
     })
     .then((response) => {
@@ -100,7 +100,6 @@ class ManageEmployees extends Component{
   renderEmployees() {
     let employees = []
     for (let i = 0; i < this.state.employeeJobs.length; i++){
-      console.log(this.state);
       let job = this.state.employeeJobs[i]
       employees.push(
         <div key={job.startDate} as="li">
@@ -115,7 +114,7 @@ class ManageEmployees extends Component{
                 {job.type}
               </Card.Text>
               {typeof(job.endDate) !== 'undefined' ?  '' : 
-              <Button variant="danger" onClick={this.handleTerminate}>Terminate</Button>}
+              <Button variant="danger" onClick={this.handleTerminate} value={JSON.stringify(job)}>Terminate</Button>}
             </Card.Body>
           </Card>
         </div>
