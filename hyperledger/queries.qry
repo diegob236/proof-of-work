@@ -1,0 +1,21 @@
+/**
+        Proof of Work
+      	Diego Batres & Nicholas Deckhut
+        CS481a3: Blockchain Principles & Applications
+        queries.js
+**/
+
+//searches for jobs where employee's id is equivalent to PARAM
+query workExperience{
+  description: "Searches for jobs where employee's id is equivalent to PARAM"
+  statement:
+  	SELECT org.pow.app.Job
+  		WHERE (employee == _$uIDParam)
+}
+
+query findJobs{
+  description: "Finds Job of an Employee at a Managers company"
+  statement:
+  	SELECT org.pow.app.Job
+  		WHERE (manager == _$managerID)
+}

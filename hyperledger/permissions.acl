@@ -1,0 +1,172 @@
+/*
+        Proof of Work
+      	Diego Batres & Nicholas Deckhut
+        CS481a3: Blockchain Principles & Applications
+        permissions.acl
+*/
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+rule newCompany1 {
+  description: "Allows users to create new companies."
+  participant: "org.pow.app.User"
+  operation: CREATE
+  resource: "org.pow.app.Job"
+  transaction: "org.pow.app.newCompany"
+  action: ALLOW
+}
+rule createCompany2 {
+  description: "Allows users to create new companies"
+  participant: "org.pow.app.User"
+  operation: CREATE
+  resource: "org.pow.app.newCompany"
+  transaction: "org.pow.app.newCompany"
+  action: ALLOW
+}
+rule createCompany3 {
+  description: "Allows users to create new companies"
+  participant: "org.pow.app.User"
+  operation: CREATE
+  resource: "org.hyperledger.composer.system.HistorianRecord"
+  transaction: "org.pow.app.newCompany"
+  action: ALLOW
+}
+rule createCompany4 {
+  description: "Allows users to create new companies"
+  participant: "org.pow.app.User"
+  operation: CREATE
+  resource: "org.pow.app.Company"
+  transaction: "org.pow.app.newCompany"
+  action: ALLOW
+}
+rule createCompany5 {
+  description: "Allows users to create new companies"
+  participant: "org.pow.app.User"
+  operation: UPDATE
+  resource: "org.pow.app.User"
+  transaction: "org.pow.app.newCompany"
+  action: ALLOW
+}
+
+
+rule RegularUser {
+    description: "Grant all users read access"
+    participant: "org.pow.app.User"
+    operation: READ
+    resource: "**"
+    action: ALLOW
+}
+
+rule Hire1 {
+    description: "Allows only managers and higher to hire employees"
+    participant: "org.pow.app.User"
+    operation: ALL
+    resource: "org.pow.app.Job"
+    transaction: "org.pow.app.hire"
+    action: ALLOW
+}
+
+rule Hire2 {
+    description: "Allows only managers and higher to hire employees"
+    participant: "org.pow.app.User"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.HistorianRecord"
+    transaction: "org.pow.app.hire"
+    action: ALLOW
+}
+
+rule Hire3 {
+    description: "Allows only managers and higher to hire employees"
+    participant: "org.pow.app.User"
+    operation: ALL
+    resource: "org.pow.app.hire"
+    transaction: "org.pow.app.hire"
+    action: ALLOW
+}
+
+rule Hire4 {
+    description: "Allows only managers and higher to hire employees"
+    participant: "org.pow.app.User"
+    operation: ALL
+    resource: "org.pow.app.User"
+    transaction: "org.pow.app.hire"
+    action: ALLOW
+}
+
+rule Terminate1 {
+    description: "Allows only managers and higher to terminate employees"
+    participant: "org.pow.app.User"
+    operation: CREATE
+    resource: "org.pow.app.terminate"
+    action: ALLOW
+}
+rule Terminate2 {
+    description: "Allows only managers and higher to terminate employees"
+    participant: "org.pow.app.User"
+    operation: UPDATE
+    resource: "org.pow.app.User"
+  	transaction: "org.pow.app.terminate"
+    action: ALLOW
+}
+rule Terminate3 {
+    description: "Allows only managers and higher to terminate employees"
+    participant: "org.pow.app.User"
+    operation: UPDATE
+    resource: "org.pow.app.Job"
+  	transaction: "org.pow.app.terminate"
+    action: ALLOW
+}
+rule Terminate4 {
+    description: "Allows only managers and higher to terminate employees"
+    participant: "org.pow.app.User"
+    operation: CREATE
+    resource: "org.hyperledger.composer.system.HistorianRecord"
+    transaction: "org.pow.app.terminate"
+    action: ALLOW
+}
+
+rule Quit1 {
+  description: "Allows people to quit a job."
+    participant: "org.pow.app.User"
+    operation: CREATE
+    resource: "org.pow.app.quit"
+    action: ALLOW
+}
+rule Quit2 {
+  description: "Allows people to quit a job."
+    participant: "org.pow.app.User"
+    operation: CREATE
+    resource: "org.hyperledger.composer.system.HistorianRecord"
+    transaction: "org.pow.app.quit"
+    action: ALLOW
+}
+rule Quit3 {
+  description: "Allows people to quit a job."
+    participant: "org.pow.app.User"
+    operation: UPDATE
+    resource: "org.pow.app.Job"
+    transaction: "org.pow.app.quit"
+    action: ALLOW
+}
+rule Quit4 {
+  description: "Allows people to quit a job."
+    participant: "org.pow.app.User"
+    operation: UPDATE
+    resource: "org.pow.app.User"
+    transaction: "org.pow.app.quit"
+    action: ALLOW
+}

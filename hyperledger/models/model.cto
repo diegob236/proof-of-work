@@ -1,0 +1,78 @@
+/*
+        Proof of Work
+      	Diego Batres & Nicholas Deckhut
+        CS481a3: Blockchain Principles & Applications
+        model.cto
+*/
+
+namespace org.pow.app
+
+asset Job identified by jobID {
+  o String jobID
+  o String jobTitle
+  o String location
+  o String description
+  o AccountType type
+  o DateTime startDate
+  o DateTime endDate optional
+  o Company company
+  --> User manager 
+  --> User employee  //owner
+}
+
+enum AccountType {
+  o UNEMPLOYED
+  o WORKER
+  o MANAGER
+  o ADMINISTRATOR
+}
+
+participant User identified by uID {
+  o String uID
+  o AccountType type
+  o String name
+  o DateTime DOB
+  o String email
+  o String phone
+  --> Company company optional
+}
+
+participant Company identified by companyID {
+  o String companyID
+  o String name
+  o DateTime founded
+  o String email
+  o String phone
+}
+
+transaction newCompany {
+  o String companyID
+  o String founderJobID
+  o String name
+  o String location
+  o String description
+  o String email
+  o String phone
+  --> User founder
+}
+
+transaction hire {
+  o String jobID
+  o String jobTitle
+  o String location
+  o String description
+  o AccountType type
+  --> User manager
+  --> User employee
+}
+
+transaction terminate {
+  --> Job job
+  --> User manager
+  --> User employee
+}
+
+transaction quit {
+  --> Job job
+  --> User employee
+}
